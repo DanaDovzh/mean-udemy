@@ -1,0 +1,12 @@
+<mat-card class="post-create">
+  <div class="post-create__data" [formGroup]="newPost">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label class="label">First name</mat-label>
+        <input matInput formControlName="title">
+      </mat-form-field>
+      <mat-form-field class="post-create__form">
+        <textarea class="post-create__textarea" matInput rows="8" formControlName="content"></textarea>
+      </mat-form-field>
+  </div>
+  <button class="post-create__btn" mat-button>Basic</button>
+</mat-card>
