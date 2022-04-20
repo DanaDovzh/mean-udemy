@@ -1,12 +1,14 @@
 <mat-card class="post-create">
-  <div class="post-create__data" [formGroup]="newPost">
+  <form class="post-create__data" [formGroup]="newPostForm" (submit)="addNewPost()">
       <mat-form-field class="example-full-width" appearance="fill">
         <mat-label class="label">First name</mat-label>
         <input matInput formControlName="title">
+        <mat-error *ngIf="newPostForm.controls.title.invalid">{{ getError(newPostForm.controls.title)}}</mat-error>
       </mat-form-field>
       <mat-form-field class="post-create__form">
-        <textarea class="post-create__textarea" matInput rows="8" formControlName="content"></textarea>
+        <textarea placeholder="Your thoughts" class="post-create__textarea" matInput rows="8" formControlName="content"></textarea>
+        <mat-error *ngIf="newPostForm.controls.content.invalid">ff </mat-error>
       </mat-form-field>
-  </div>
-  <button class="post-create__btn" mat-button>Basic</button>
+      <button class="post-create__btn" mat-button type="submit">Basic</button>
+  </form>
 </mat-card>

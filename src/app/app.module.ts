@@ -1,14 +1,16 @@
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-
-import { AppComponent } from './app.component';
-import { PostCreateComponent } from './posts/post-create/post-create.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HeaderComponent } from './header/header.component';
-import { MaterialModule } from 'src/material.module';
+import { MaterialModule } from '../material.module';
 import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { HeaderComponent } from './header/header.component';
+import { PostCreateComponent } from './posts/post-create/post-create.component';
 import { PostsListComponent } from './posts/post-list/posts-list.component';
+import { PostsService } from './posts/post-list/posts-list.service';
+
 
 @NgModule({
   declarations: [
@@ -23,10 +25,13 @@ import { PostsListComponent } from './posts/post-list/posts-list.component';
     BrowserAnimationsModule,
     MaterialModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
 
   ],
-  providers: [],
+  providers: [
+    PostsService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

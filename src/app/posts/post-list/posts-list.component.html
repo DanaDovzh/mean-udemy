@@ -1,16 +1,19 @@
-<mat-accordion class="example-headers-align" multi="true" *ngIf="posts.length; else noPosts">
-  <mat-expansion-panel>
+<mat-accordion class="posts-card" multi="true" *ngIf="posts.length; else noPosts">
+  <mat-expansion-panel class="post-card" *ngFor="let post of posts">
     <mat-expansion-panel-header>
       <mat-panel-title>
-        Day of the trip
+        {{ post.title }}
       </mat-panel-title>
-      <mat-panel-description>
-        Inform the date you wish to travel
-        <mat-icon>date_range</mat-icon>
-      </mat-panel-description>
     </mat-expansion-panel-header>
 
-    <p>I'm visible because I am open</p>
+    <p>{{post.content }}</p>
+    <mat-action-row class="post-bottom">
+      <button mat-icon-button color="warn" aria-label="Example icon-button with a heart icon">
+        <mat-icon>favorite</mat-icon>
+      </button>
+      <button mat-button color="primary">Edit</button>
+      <button mat-button color="warn">Delete</button>
+    </mat-action-row>
   </mat-expansion-panel>
 </mat-accordion>
 
