@@ -27,7 +27,6 @@ import { PostsService } from './posts/post-list/posts-list.service';
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule
-
   ],
   providers: [
     PostsService

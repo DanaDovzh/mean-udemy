@@ -15,11 +15,7 @@ export class PostsService {
   private postsUpdated = new Subject<Post[]>();
 
   getPosts() {
-    return this.http.get<{message: string, posts: Post[]}>('http://localhost:3000/api/posts')
-    .subscribe((body) => {
-      this.posts = body.posts;
-      this.postsUpdated.next([...this.posts])
-    });
+    return this.http.get<{message: string, posts: Post[]}>('http://localhost:3000/api/posts');
   }
 
   getPostUpdateListener() {
@@ -28,8 +24,16 @@ export class PostsService {
 
   addPost({title, content}: Post) {
     const post: Post = { title, content };
-    this.posts.push(post);
-    console.log('add', this.posts);
+    this.http.post<{message: string}>('http://localhost:3000/api/post', post)
+      .subscribe((data) => {
+        console.log('anvwer ', data)
+        this.posts.push(post);
+      })
+    // console.log('add', this.posts);
 
+  }
+
+  deletePost(id: string) {
+    return this.http.delete(`http://localhost:3000/api/posts/${id}`)
   }
 }
