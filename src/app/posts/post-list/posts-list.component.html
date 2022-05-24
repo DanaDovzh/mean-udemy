@@ -17,7 +17,7 @@
         <button mat-icon-button color="warn" aria-label="Example icon-button with a heart icon">
           <mat-icon>favorite</mat-icon>
         </button>
-        <button mat-button color="primary">Edit</button>
+        <button mat-button color="primary" (click)="editPost(post)">Edit</button>
         <button mat-button color="warn" (click)="deletePost(post._id)">Delete</button>
       </mat-action-row>
     </mat-expansion-panel>

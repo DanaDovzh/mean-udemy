@@ -26,8 +26,9 @@ app.post('/api/post', (req, res, next) => {
     title: req.body.title,
     content: req.body.content
   });
-  post.save();
-  console.log(post);
+  post.save().then(result => {
+    console.log(1, result);
+  });
   res.status(201).json({
     message: 'Post added'
   });
@@ -40,7 +41,7 @@ app.get('/api/posts',(req, res, next) => {
         posts: result
       });
       console.log(result)})
-    .catch(err => {console.log(err) })
+    .catch(err => {console.log(err); })
 
 })
 
@@ -52,5 +53,7 @@ app.delete('/api/posts/:id',(req, res, next) => {
     res.status(200).json({ message: 'Post is deleted'})
   })
 })
+
+// app.getPost()
 
 module.exports = app;

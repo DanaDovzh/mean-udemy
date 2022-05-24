@@ -24,7 +24,24 @@ export class PostsListComponent implements OnInit{
   openDialog() {
     const dialogRef = this.dialog.open(PostCreateComponent, {
       autoFocus: false,
-      disableClose: true
+      disableClose: true,
+      data: {
+        mode: 'create'
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
+  }
+
+  editPost(post) {
+    const dialogRef = this.dialog.open(PostCreateComponent, {
+      autoFocus: false,
+      disableClose: true,
+      data: {
+        mode: 'edit',
+        dataPost: post
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {
