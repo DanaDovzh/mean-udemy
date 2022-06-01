@@ -1,4 +1,4 @@
-<div class="page">
+<div class="page" [class.blur]="isLoading">
   <div class="add-post">
     <button mat-raised-button (click)="openDialog()" class="add-post--btn">
       Create a new post
@@ -27,3 +27,4 @@
     <p class="info-test">No posts added yet</p>
   </ng-template>
 </div>
+<mat-spinner class="spinner" *ngIf="isLoading"></mat-spinner>

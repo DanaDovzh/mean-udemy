@@ -15,6 +15,7 @@ export class PostCreateComponent implements OnInit {
   newPostForm: FormGroup;
   mode: string = 'create';
   response = false;
+  imagePreview;
   constructor(
     private fb: FormBuilder,
     private postsService: PostsService,
@@ -25,7 +26,8 @@ export class PostCreateComponent implements OnInit {
   ngOnInit(): void {
     this.newPostForm = this.fb.group({
       title: ['', Validators.required],
-      content: ['', [Validators.required, Validators.minLength(5)]]
+      content: ['', [Validators.required, Validators.minLength(5)]],
+      image: null
     });
     console.log(23, this.data)
 
@@ -40,18 +42,36 @@ export class PostCreateComponent implements OnInit {
   getError(data){
     // console.log(data, this.newPost.controls.title.getError('required')  )
   }
-  addNewPost(): void {
-    console.log(this.dialogRef);
 
+  onImagePicked(event: Event) {
+    const file = (event.target as HTMLInputElement).files[0];
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imagePreview = reader.result;
+    }
+    reader.readAsDataURL(file);
+  }
+
+  save(): void {
     if(this.newPostForm.invalid) {
       return;
     }
-    this.postsService.addPost(this.newPostForm.value).subscribe(() => {
-      this.dialogRef.close();
-    });
+
+    if(this.data.mode === 'create'){
+      this.postsService.addPost(this.newPostForm.value).subscribe(() => {
+        this.dialogRef.close();
+      });
+    } else {
+      console.log('edit');
+
+      this.postsService.updatePost(this.data.dataPost['_id'], this.newPostForm.value)
+      .subscribe((data) => {
+        console.log(data);
+
+        this.dialogRef.close()
+      })
+    }
     this.newPostForm.reset()
     this.newPostForm.markAllAsTouched()
-
-    console.log(2, this.newPostForm)
   }
 }

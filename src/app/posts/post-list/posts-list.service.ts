@@ -24,10 +24,18 @@ export class PostsService {
 
   addPost({title, content}: Post) {
     const post: Post = { title, content };
-    return this.http.post<{message: string}>('http://localhost:3000/api/post', post);
+    return this.http.post<{message: string}>('http://localhost:3000/api/posts', post);
+  }
+
+  updatePost(id: string, post: Post) {
+    return this.http.put(`http://localhost:3000/api/posts/${id}`, {...post, id});
+  }
+
+  getPostById(id: string) {
+    return this.http.get(`http://localhost:3000/api/posts/${id}`);
   }
 
   deletePost(id: string) {
-    return this.http.delete(`http://localhost:3000/api/posts/${id}`)
+    return this.http.delete(`http://localhost:3000/api/posts/${id}`);
   }
 }

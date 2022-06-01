@@ -26,11 +26,6 @@ export class HeaderComponent {
 
   }
   ngOnInit() {
-    console.log(this.fillerNav)
-  }
-
-  click(valur) {
-    console.log(valur)
   }
 }
 

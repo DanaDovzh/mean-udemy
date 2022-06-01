@@ -6,12 +6,17 @@
     </button>
   </mat-card-title>
   <mat-card-content class="post-create__form content">
-    <form class="post-create__data" [formGroup]="newPostForm" (submit)="addNewPost()">
+    <form class="post-create__data" [formGroup]="newPostForm" (submit)="save()">
         <mat-form-field class="example-full-width" appearance="fill">
           <mat-label class="label">Title</mat-label>
           <input matInput formControlName="title">
           <mat-error *ngIf="newPostForm.controls.title.invalid">{{ getError(newPostForm.controls.title)}}</mat-error>
         </mat-form-field>
+        <div class="post-create__form" (click)="filePicker.click()">
+          <button mat-stroked-button> Add image </button>
+          <input type="file" #filePicker formControlName="image" (change)="onImagePicked($event)">
+          <img [src]="imagePreview" alt="" *ngIf="imagePreview" class="image-preview">
+        </div>
         <mat-form-field class="post-create__form textarea">
           <textarea placeholder="Your thoughts" class="post-create__textarea" matInput rows="8" formControlName="content"></textarea>
           <mat-error *ngIf="newPostForm.controls.content.invalid">ff </mat-error>

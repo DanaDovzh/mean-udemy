@@ -13,14 +13,20 @@ import { PostCreateComponent } from "../post-create/post-create.component";
 export class PostsListComponent implements OnInit{
   posts: Post[] = [];
   private postsSub: Subscription;
+  isLoading: Boolean = false;
 
   constructor(private postsService: PostsService, public dialog: MatDialog) {}
   ngOnInit() {
-    this.postsService.getPosts().subscribe(data => {
-      this.posts = data.posts;
-    });
+    this.getPosts();
   }
 
+  getPosts() {
+    this.isLoading = true;
+    this.postsService.getPosts().subscribe(data => {
+      this.posts = data.posts;
+      this.isLoading = false;
+    });
+  }
   openDialog() {
     const dialogRef = this.dialog.open(PostCreateComponent, {
       autoFocus: false,
@@ -31,6 +37,7 @@ export class PostsListComponent implements OnInit{
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      this.getPosts();
     });
   }
 
@@ -45,6 +52,7 @@ export class PostsListComponent implements OnInit{
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      this.getPosts();
     });
   }
 
@@ -55,8 +63,7 @@ export class PostsListComponent implements OnInit{
         // takeUntil(this.destroy$)
       )
     .subscribe((data) => {
-      console.log(data
-        );
+      this.posts = data.posts;
 
     });
   }
